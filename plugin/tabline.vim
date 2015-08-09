@@ -1,7 +1,7 @@
 " File:        tabline.vim
 " Maintainer:  Matthew Kitt <http://mkitt.net/>
 " Description: Configure tabs within Terminal Vim.
-" Last Change: 2012-10-21
+" Last Change: 2015-08-09
 " License:     This program is free software. It comes without any warranty,
 "              to the extent permitted by applicable law. You can redistribute
 "              it and/or modify it under the terms of the Do What The Fuck You
@@ -27,12 +27,10 @@ function! Tabline()
 
     let s .= '%' . tab . 'T'
     let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-    let s .= ' ' . tab .':'
-    let s .= (bufname != '' ? '['. fnamemodify(bufname, ':t') . '] ' : '[No Name] ')
-
-    if bufmodified
-      let s .= '[+] '
-    endif
+    let s .= ' '.tab.':'
+    let s .= (bufname != '' ? fnamemodify(bufname, ':t') : '')
+    let s .= (bufmodified ? '+' : ' ')
+    let s .= ' '
   endfor
 
   let s .= '%#TabLineFill#'
